@@ -83,7 +83,7 @@
         var testFuc = function(){
             alert("테스트입니다.");
         }
-        tbObj.innerHTML = tblStr;
+        tbObj.innerHTML = tblStr;//화면에 뿌려주라. 화면에 뿌려줘야 이벤트를 실행할 수 있다. 순서가 중요하다.!
 
         for(var i=0,max=inputObj.length;i<max;i++){
             var iObj = inputObj[i];
@@ -98,6 +98,16 @@
                 }
             }
         }
+
+        //자료구조(리스트,맵)
+
+        //list - 숫자(index) :   키를 지정해줄 수 없는것.
+        //키에대한 데이터타입을 지정할 수 없다. 그래서 게시판같은데서 사용함.
+        //
+
+        //map - 키 : 밸류 키를 지정해줄수 있는것
+        //set이라는 데이터타입 리스트 - 밸류값의 중복이 허용되지 않는다.
+
 
         //
     </script>
