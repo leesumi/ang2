@@ -1,0 +1,74 @@
+이건 그냥 텍스트 파일입니다.
+확장자만 html이에요
+
+<!-- <input type="text"> -->
+
+<input type="text"id="cnt" name="cnt">
+<input type="button" id="cntBtn" value="생성" onclick="makeTable()">
+<div id="result_div"></div>
+
+<!-- <script>
+    alert(1);
+</script> -->
+<script src="./test.js"></script>
+<script src="./person.js"></script>
+<script>
+   // var t = new Test();//메모리 생성
+   // t.alertStr("a","b");
+    //t.plus();//읽을 수없다.protected 함수 내부에서만 사용가능하다.
+
+   // t = new Test2();//새로운 메모리가 또 생성
+
+    //var p =new Person();
+   // p.name();
+   // p.alertName();
+
+    var p = new Person("이수미",40,"남자","서울");
+    p.writePersonInfo();
+
+    p.play = function(){
+        alert("놀고있네요");
+    }
+    p.play();
+
+    var a = 3;
+    {//구조체
+        var a = 4;
+    }
+    alert(a);//화면에서 4가 나온다 - 호이스트!
+    //자바스크립트는 신뢰할 언어기는 하지만 무조건적으로 믿을수는 없다.
+
+    function makeTable(){
+        var cntObj = document.getElementById("cnt");
+        var count = new Number(cntObj.value);
+        var str = "";
+        for(var i = 1;i<=count;i++){
+            str += i+ "번돌고 있습니다.<br/>";
+        }
+        document.getElementById("result_div").innerHtml = str;//innerHtml = html+append ->html을 처음부터 렌더링을 다시해준다.
+    }
+    //getElementById,getElementsById
+
+    
+    // function makeTable(){
+    //     var cntObj = document.getElementById("cnt");
+    //     var count = new Number(cntObj.value);
+    //     var str = "<table border='1'>";
+    //     for(var i = 1;i<=count;i++){
+    //         str += "<tr>";
+    //         for(var j=1;j<=count;j++){
+    //             str += "<td>" + i + "</td>";
+    //         }
+    //         str += "<tr/>"
+    //     }
+    //     str += "<table/>";
+    //     document.getElementById("result_div").innerHtml = str;
+    // }
+    //DI, Ioc Aop(oop)
+
+    var a = new Test();
+    a.alertStr();
+
+    var p = new Person();
+    alert(p.name);//나오지 않는다. person.js파일에 name은 private이니까!
+</script>
