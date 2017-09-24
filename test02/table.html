@@ -1,14 +1,17 @@
 <html>
 <body>
     <table border="1" id="table1">
-        <tr>
-            <th>이름</th>
-            <th>주소</th>
-            <th>성별</th>
-            <th>아이디</th>
-            <th>가입일</th>
-            <th>유저삭제</th>
-        </tr>
+        <thead>
+            <tr><!-- 메타데이터 : 제목 //  -->
+                <th date-field="name">이름</th>
+                <th date-field="address">주소</th>
+                <th date-field="regDate">가입일</th>
+                <th date-field="gender">성별</th>
+                <th date-field="id">아이디</th>
+                <th date-field="btn">유저삭제</th>
+                <th date-field="btnModify">유저수정</th>
+            </tr>
+        </thead>    
         <tbody id="tb1">
             <!-- <tr>
             <td>이수미</td>
@@ -21,29 +24,75 @@
         </tbody>
         
     </table>
+    <div id="nodeDiv"></div>
     <script>
         var tableObj=
         document.getElementById("table1");//get ElementById, getElementByName - 노드를 가져오는 아이들
         //alert(tableObj.getAttribute("id"));
+        var nodes = tableObj.childNodes;
+        var divObj = document.getElementById("nodeDiv");
+        var thObj = nodes[1].childNodes;
+        var trObj = thObj[1].childNodes;
+        var keyStrs = new Array();
+
+        for(var i=0;i<trObj.length;i++){
+            var tro = trObj[i];
+            try{//예외 처리(try,catch)
+                if(tro.getAttribute("date-field") != null){
+                    keyStrs[keyStrs.length] = tro.getAttribute("date-field");
+                }
+            }catch(e){
+
+            }
+            //divObj.innerHTML += trObj[i];//첫번째 레벨 노드만 나온다.
+        }
+
+        divObj.innerHTML = keyStrs;
+
         var tbList = {};//구조체를 만들겠다 선언 - 키벨류 6개를 가지고 있는 구조체
+        //
         tbList["name"] = "leesumi";//키벨류
         tbList["address"]= "seoul";
         tbList["gender"]="female";
         tbList["id"] = "leesumi";
         tbList["regDate"] = "2017-09-24";
         tbList["btn"] = "<input type='button' value='삭제'></input>";
-
+        tbList["btnModify"] = "<input type='button' value='수정'></input>";
         var tblStr="";
-        tblStr += "<tr>";
-        tblStr += "<td>"+tbList["name"] +"</td>";
-        tblStr += "<td>"+tbList["address"] +"</td>";
-        tblStr += "<td>"+tbList["gender"] +"</td>";
-        tblStr += "<td>"+tbList["id"] +"</td>";
-        tblStr += "<td>"+tbList["regDate"] +"</td>";
-        tblStr += "<td>"+tbList["btn"] +"</td>";    
-        tblStr += "</tr>";
+
+        tblStr +="<tr>"
+        for(var i=0,max=keyStrs.length;i<max;i++){
+            tblStr += "<td>"+ tbList[keyStrs[i]] +"</td>";
+        }
+        tblStr +="</tr>"
+
+        //var tbObj = 
+
+        // tblStr += "<tr>";
+        // tblStr += "<td>"+tbList["name"] +"</td>";
+        // tblStr += "<td>"+tbList["address"] +"</td>";
+        // tblStr += "<td>"+tbList["gender"] +"</td>";
+        // tblStr += "<td>"+tbList["id"] +"</td>";
+        // tblStr += "<td>"+tbList["regDate"] +"</td>";
+        // tblStr += "<td>"+tbList["btn"] +"</td>";    
+        // tblStr += "</tr>";
+
         var tbObj = document.getElementById("tb1");
+        
+        var inputObj = document.getElementsByTagName("input");
+        var testFuc = function(){
+            alert("테스트입니다.");
+        }
         tbObj.innerHTML = tblStr;
+
+        for(var i=0,max=inputObj.length;i<max;i++){
+            var iObj = inputObj[i];
+            if(iObj.getAttribute("type")=="button"){
+                iObj.onclick=function(){
+                    alert(this.value);//this는 iObj
+                }
+            }
+        }
     </script>
 </body>
 </html>
